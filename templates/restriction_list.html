@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning Permission Check</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+    <h1>Check Planning Permission</h1>
+
+    <form id="planning-permission-form" hx-post="{% url 'check_permission_htmx' %}" hx-target="#result" hx-swap="outerHTML">
+        {% csrf_token %}
+        <div id="restrictions">
+            {% for restriction in restrictions %}
+            <section>
+                <h2>{{ restriction.name }}</h2>
+                <div>
+                    {% for detail in restriction.details.all %}
+                    <label>
+                        <input type="checkbox" name="details" value="{{ detail.id }}">
+                        {{ detail.description }}
+                    </label><br>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Check Planning Permission</button>
+    </form>
+
+    <div id="result">
+        <!-- Тут будуть виводитися результати перевірки -->
+    </div>
+</body>
+</html>

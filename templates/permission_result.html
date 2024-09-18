@@ -1,0 +1,21 @@
+<div id="result">
+    <h3>{{ result }}</h3>
+    
+    {% if universal_codes %}
+    <h4>Universal Category Codes:</h4>
+    <ul>
+        {% for code in universal_codes %}
+        <li>{{ code }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if other_codes %}
+    <h4>Other Category Codes:</h4>
+    <ul>
+        {% for code in other_codes %}
+        <li>{{ code }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
